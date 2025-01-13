@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { detailsData, modalData } from '../constants/text-constants';
 import { episodeType, selectedData } from '../model';
 import { forkJoin } from 'rxjs';
+import { fetchEpisodeDetails } from '../common-utils';
 
 @Component({
   selector: 'app-details',
@@ -31,8 +32,7 @@ export class DetailsComponent {
   }
   onDataClick() {
     this.isVisible = true;
-    this.fetchEpisodeDetails(this.nameDetails.episode);
-    
+        fetchEpisodeDetails(this.nameDetails.episode,this.episodeData)    
 
   }
   hideDetails() {
@@ -40,20 +40,4 @@ export class DetailsComponent {
     this.detailsEmitter.emit();
 
   }
-   fetchEpisodeDetails(episodeUrls: any[]): void {
-      const episodeRequests = episodeUrls.map(url =>
-        this.dataService.getEpisodeDetails(url)
-      );
-      forkJoin(episodeRequests).subscribe({
-        next: (responses) => {
-          this.episodeData = responses;  
-        },
-        error: (error) => {
-          console.error('Error fetching episode details', error);
-        },
-       
-      });
-    
-    }
-
 }

@@ -6,6 +6,7 @@ import { AuthService } from '../service/authentication.service';
 import {  Router } from '@angular/router';
 import { data, episodeType, selectedData } from '../model';
 import { modalData, paginationData, tableData } from '../constants/text-constants';
+import { fetchEpisodeDetails } from '../common-utils';
 
 @Component({
   selector: 'app-dashboard',
@@ -99,7 +100,7 @@ export class DashboardComponent {
     this.selectedEpisodeIndex = i;
 
     this.isVisible = true;
-    this.fetchEpisodeDetails(this.selectedEpisode.episode)
+    fetchEpisodeDetails(this.selectedEpisode.episode,this.episodeDetails)
 
 
 
@@ -132,20 +133,6 @@ export class DashboardComponent {
   detailsEmitter() {
     this.selectedRowIndex = -1;
     this.selectedpERSON = undefined;
-  }
-  fetchEpisodeDetails(episodeUrls: string[]): void {
-    const episodeRequests = episodeUrls.map(url =>
-      this.dataService.getEpisodeDetails(url)
-    );
-    console.log(episodeRequests);
-    forkJoin(episodeRequests).subscribe({
-      next: (responses: episodeType[]) => {
-        this.episodeDetails = responses; 
-        console.log(this.episodeDetails);
-      },
-     
-    });
-  
   }
   highlightText(text: string, query: string): string {
     if (!query) return text;
