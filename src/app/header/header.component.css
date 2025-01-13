@@ -1,0 +1,101 @@
+header {
+  background: linear-gradient(135deg, #8cad31, #17ce32); 
+  color: #fff; 
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  padding: 15px 0;  
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px; 
+}
+
+.logo a {
+  text-decoration: none;
+}
+
+.logo i {
+  color: #fff; 
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.logo i:hover {
+  transform: scale(1.1);  
+  color: #f3e5f5; 
+} 
+
+.right-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;  
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  padding: 8px 12px;  
+  font-size: 14px;  
+  border-radius: 30px;
+  border: 1px solid #fff;
+  background-color: #f3e5f5;  
+  width: 220px;  
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #9c27b0; 
+  box-shadow: 0 0 8px rgba(156, 39, 176, 0.6);
+}
+
+.logout-btn {
+  background-color: #fff;
+  border: none;
+  padding: 8px 20px; 
+  border-radius: 30px;
+  cursor: pointer;
+  color: #9c27b0; 
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;  
+  transition: background-color 0.3s, color 0.3s, transform 0.3s ease;
+}
+
+.logout-btn i {
+  font-size: 18px;  
+}
+
+.logout-btn:hover {
+  background-color: #9c27b0;
+  color: #fff;
+  transform: scale(1.05);  
+}
+
+.logout-btn:hover i {
+  color: #fff;
+}
+
+.header-text {
+  text-align: center;
+  padding: 20px 10px;  
+  background-color: #0c831e; 
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 -6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.header-text h1 {
+  font-size: 28px;  
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);  
+  letter-spacing: 1px;  
+}

@@ -1,0 +1,138 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(8px); 
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal {
+  background: linear-gradient(135deg, #1b4d3e, #29717f);
+  padding: 35px;
+  border-radius: 15px;
+  max-width: 600px;
+  width: 100%;
+  height: 70vh;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: modal-appear 0.3s ease-out;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  position: sticky;
+  top: 0; 
+  background: #1b4d3e; 
+  padding: 10px;
+  z-index: 1; 
+}
+
+.modal-header h2 {
+  font-size: 28px;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin: 0;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4); 
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 26px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close-button:hover {
+  color: #ff7f7f; 
+}
+
+.modal-body {
+  flex-grow: 1; 
+  overflow-y: auto; 
+  margin-bottom: 20px;
+  padding-right: 10px; 
+}
+
+.modal-body .card {
+  background: #fef2f2;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 12px;
+  width: 100%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  margin: 10px 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.modal-body .card:hover {
+  transform: translateY(-5px); 
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+.modal-body .card p {
+  font-size: 18px;
+  color: #444;
+  line-height: 1.6;
+  font-family: 'Roboto', sans-serif;
+  margin-bottom: 10px;
+  letter-spacing: 1px; 
+}
+
+.modal-body .card p strong {
+  color: #ff7f7f;
+  font-weight: bold;
+}
+
+.modal-footer {
+  text-align: right;
+  margin-top: 10px;
+  position: sticky;
+  bottom: 0;
+  background: #1b4d3e;
+  padding: 10px;
+  z-index: 1;
+}
+
+.modal-footer button {
+  background-color: #ff7f7f;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.modal-footer button:hover {
+  background-color: #f56262;
+  transform: translateY(-2px);
+}
+
+@keyframes modal-appear {
+  0% {
+      opacity: 0;
+      transform: scale(0.95);
+  }
+  100% {
+      opacity: 1;
+      transform: scale(1);
+  }
+}

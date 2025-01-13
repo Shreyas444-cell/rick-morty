@@ -1,0 +1,121 @@
+.details-card {
+    width: 30%;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+}
+
+.details-card .card-img-top {
+    border-radius: 8px;
+    max-height: 250px;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+.details-card .card-title {
+    font-size: 24px;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.status,
+.gender {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #555;
+}
+
+.status.alive {
+    color: #4CAF50;
+}
+
+.status.alive i {
+    color: #4CAF50;
+}
+
+.status.dead {
+    color: #f44336;
+}
+
+.status.dead i {
+    color: #f44336;
+}
+
+.status.unknown {
+    color: #9E9E9E;
+}
+
+.status.unknown i {
+    color: #9E9E9E;
+}
+
+.gender.male {
+    color: #2196F3;
+}
+
+.gender.male i {
+    color: #2196F3;
+}
+
+.gender.female {
+    color: #E91E63;
+}
+
+.gender.female i {
+    color: #E91E63;
+}
+
+.gender.unknown {
+    color: #9E9E9E;
+}
+
+.gender.unknown i {
+    color: #9E9E9E;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.dashboard-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dashboard-button:hover {
+    background-color: #45a049;
+}
+
+.episode {
+    color: #2196F3;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.episode:hover {
+    color: #1976D2;
+}
+
+
+
+    .details-card .card-img-top {
+        max-height: 200px;
+    }

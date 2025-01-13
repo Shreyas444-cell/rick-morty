@@ -1,0 +1,19 @@
+<div class="modal-overlay" *ngIf="isVisible">
+    <div class="modal">
+        <div class="modal-header">
+            <h2>{{popupData.episodeDetails}}</h2>
+            <button class="close-button"(click)= "close()">{{popupData.x}}</button>
+
+        </div>
+    <div class="modal-body">
+        <ng-content></ng-content>
+
+    </div>
+    <div class="modal-footer">
+        <button (click)="close()">{{popupData.close}}</button>
+
+
+        </div>
+    </div>
+
+</div>

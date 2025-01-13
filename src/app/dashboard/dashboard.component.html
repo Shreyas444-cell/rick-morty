@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="d-flex">
+        <div class="table-container" [ngClass]="{'expanded': !selectedpERSON,'collapsed':selectedpERSON}">
+            <table class="table-table-striped">
+                <thead>
+                    <tr>
+                        <th>{{tableData.name}}</th>
+                        <th>{{tableData.episodeNo}}</th>
+                        <th>{{tableData.gender}}</th>
+                        <th>{{tableData.origin}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of filteredItems; let i=index">
+                        <td (click)="onNameClick(item,i)" [ngClass]="{'selected': i=== selectedRowIndex}">
+                            <span [innerHTML]="highlightText(item.name, searchedQuery)"></span></td>
+                        <td (click)="onEpisodeClick(item,i)" [ngClass]="{'selected': i=== selectedEpisodeIndex}">{{
+                            item?.episode.length }}</td>
+                        <td>{{ item?.gender }}</td>
+                        <td>{{ item?.origin.name }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <button class="btn btn-primary" (click)="fetchData(prevUrl)"
+                    [disabled]="!prevUrl">{{paginationData.previous}}</button>
+                <span>{{paginationData.page}}
+                    {{currentPage}} {{paginationData.of}}
+                    {{totalPages}}
+                </span>
+                <button class="btn btn-primary" (click)="fetchData(nextUrl)"
+                    [disabled]="!nextUrl">{{paginationData.next}}</button>
+            </div>
+
+        </div>
+        <div class="details-container" *ngIf="selectedpERSON">
+            <app-details [nameDetails]="selectedpERSON"
+                (detailsEmitter)="detailsEmitter()">
+            </app-details>
+        </div>
+    </div>
+</div>
+<app-modal [isVisible]="isVisible" (closed)="closeModal() ">
+    <div class="card-container" *ngFor="let episode of episodeDetails">
+        <div class="card">
+            <p><strong>{{modalData.name}}</strong> {{ episode?.name }}</p>
+            <p><strong>{{modalData.air_date}}</strong> {{ episode?.air_date}}</p>
+            <p><strong>{{modalData.episode}}</strong> {{ episode?.episode }}</p>
+        </div>
+    </div>
+</app-modal>

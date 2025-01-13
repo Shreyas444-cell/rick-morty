@@ -1,0 +1,23 @@
+<header>
+  <div class="header-content">
+      <div class="logo">
+          <a href="/">
+              <i class="fas fa-space-shuttle fa-3x"></i>
+          </a>
+      </div>
+
+      <div class="right-section">
+          <div class="search-container">
+              <input *ngIf="isLoggedIn" type="text" placeholder="Search..." (input)="searchByName($event)" class="search-input" />
+          </div>
+
+          <button *ngIf="isLoggedIn" (click)="logout()" class="logout-btn">
+              <i class="fas fa-sign-out-alt"></i> {{headerData.logout}}
+          </button>
+      </div>
+  </div>
+
+  <div class="header-text">
+      <h1>{{headerData.title}}</h1>
+  </div>
+</header>
