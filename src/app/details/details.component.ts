@@ -1,9 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { DataService } from '../service/data.service';
-import { ActivatedRoute } from '@angular/router';
 import { detailsData, modalData } from '../constants/text-constants';
 import { episodeType, selectedData } from '../model';
-import { forkJoin } from 'rxjs';
 import { fetchEpisodeDetails } from '../common-utils';
 
 @Component({
@@ -12,7 +9,7 @@ import { fetchEpisodeDetails } from '../common-utils';
   styleUrls: ['./details.component.css'],
 })
 export class DetailsComponent {
-  constructor(private dataService: DataService) {
+  constructor() {
 
   }
   @Input() nameDetails: selectedData;

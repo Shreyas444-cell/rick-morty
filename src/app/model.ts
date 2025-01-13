@@ -11,7 +11,6 @@ export interface selectedData {
     status: string;  
     type: string;  
     url: string;  
-    highlightedName?: string;
   }
   export interface data{
     

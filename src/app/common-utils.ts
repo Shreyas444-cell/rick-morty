@@ -5,7 +5,6 @@ import { episodeType } from "./model";
     const episodeRequests = episodeUrls.map(url =>
       this.dataService.getEpisodeDetails(url)
     );
-    console.log(episodeRequests);
     forkJoin(episodeRequests).subscribe({
       next: (responses: episodeType[]) => {
         episodeDetails = responses; 
