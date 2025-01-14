@@ -23,7 +23,7 @@
             </table>
             <div class="pagination">
                 <button class="btn btn-primary" (click)="prevPage()"
-                    [disabled]="!prevUrl">{{paginationData.previous}}</button>
+                    [disabled]="currentPage === 1">{{paginationData.previous}}</button>
                 <span>{{paginationData.page}}
                     {{currentPage}} {{paginationData.of}}
                     {{totalPages}}

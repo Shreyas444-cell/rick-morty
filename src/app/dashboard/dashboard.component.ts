@@ -65,12 +65,19 @@ export class DashboardComponent {
   nextPage(): void {
     if (this.currentPage < this.totalPages) {
       this.fetchData(this.currentPage + 1);
+      this.filterService.searchQuery$.pipe(debounceTime(10)).subscribe((query: string) => {
+        this.filterName(query);
+  
+      })
     }
   }
 
   prevPage(): void {
     if (this.currentPage > 1) {
       this.fetchData(this.currentPage - 1);
+      this.filterService.searchQuery$.pipe(debounceTime(10)).subscribe((query: string) => {
+        this.filterName(query);
+      })
     }
   }
   
