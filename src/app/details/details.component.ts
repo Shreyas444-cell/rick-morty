@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { detailsData, modalData } from '../constants/text-constants';
 import { episodeType, selectedData } from '../model';
-import { fetchEpisodeDetails } from '../common-utils';
+import { DataService } from '../service/data.service';
 
 @Component({
   selector: 'app-details',
@@ -9,7 +9,7 @@ import { fetchEpisodeDetails } from '../common-utils';
   styleUrls: ['./details.component.css'],
 })
 export class DetailsComponent {
-  constructor() {
+  constructor(private  dataService:DataService) {
 
   }
   @Input() nameDetails: selectedData;
@@ -29,12 +29,20 @@ export class DetailsComponent {
   }
   onDataClick() {
     this.isVisible = true;
-        fetchEpisodeDetails(this.nameDetails.episode,this.episodeData)    
+       this.fetchEpisodes(this.nameDetails.episode);
 
   }
   hideDetails() {
     this.isDetailsHide = true;
     this.detailsEmitter.emit();
 
+  }
+  fetchEpisodes(episodeUrls: string[]): void {
+    this.dataService.getEpisodeDetails(episodeUrls).subscribe(
+      episodes => {
+        this.episodeData = episodes;
+      },
+      
+    );
   }
 }

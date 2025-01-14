@@ -6,7 +6,6 @@ import { AuthService } from '../service/authentication.service';
 import {  Router } from '@angular/router';
 import { data, episodeType, selectedData } from '../model';
 import { modalData, paginationData, tableData } from '../constants/text-constants';
-import { fetchEpisodeDetails } from '../common-utils';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,7 +22,7 @@ export class DashboardComponent {
   searchQuery: string = "";
   isVisible: boolean = false;
   authSubscription: Subscription;
-  selectedEpisode: selectedData;
+  selectedEpisode: string[];
   episodeDetails: episodeType[]=[];
   currentPage: number = 1;
   totalPages: number = 0;
@@ -35,13 +34,13 @@ export class DashboardComponent {
   searchedQuery: string = "";
   modalData = modalData;
   ngOnInit() {
-    this.authSubscription = this.authService.isLoggedIn$.subscribe((isLoggedIn) => {
+     this.authService.isLoggedIn$.subscribe((isLoggedIn) => {
       if (!isLoggedIn) {
         this.router.navigate(['/login']);
       }
     });
 
-    this.fetchData();
+    this.fetchData(this.currentPage);
     this.filterService.searchQuery$.pipe(debounceTime(300)).subscribe((query: string) => {
       this.filterName(query);
 
@@ -51,42 +50,28 @@ export class DashboardComponent {
 
   }
 
-  fetchData(url?: string): void {
-    this.selectedRowIndex = -1;
-    this.selectedpERSON = undefined;
-    this.dataService.getData(url).subscribe({
-      next: (response: data) => {
-        if (response) {
-          this.data = response;
-          this.totalItems = response.info.count;
-          this.totalPages = response.info.pages;
-          this.nextUrl = response.info.next;
-          this.prevUrl = response.info.prev;
-          if (this.nextUrl) {
-            const nextPage = +new URL(this.nextUrl).searchParams.get('page');
-            this.currentPage = nextPage - 1;
+  fetchData(page: number): void {
+    this.dataService.getData(page).subscribe(
+      response => {
+        this.data = response;
+        
+        this.totalPages = response.info.pages;
 
-          } else if (this.prevUrl) {
-            const prevPage = +new URL(this.prevUrl).searchParams.get('page');
-            this.currentPage = prevPage + 1;
-          } else {
-            this.currentPage = 1;
-          }
-          console.log(this.nextUrl);
-
-
-        }
-
-
+        this.currentPage = page;
+        this.filteredItems=this.data.results
       },
-    }
-
-
     );
+  }
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.fetchData(this.currentPage + 1);
+    }
+  }
 
-
-
-
+  prevPage(): void {
+    if (this.currentPage > 1) {
+      this.fetchData(this.currentPage - 1);
+    }
   }
   
 
@@ -96,11 +81,12 @@ export class DashboardComponent {
 
   }
   onEpisodeClick(item: selectedData, i: number) {
-    this.selectedEpisode = item;
+    this.selectedEpisode = item.episode;
     this.selectedEpisodeIndex = i;
 
     this.isVisible = true;
-    fetchEpisodeDetails(this.selectedEpisode.episode,this.episodeDetails)
+    console.log(this.selectedEpisode);
+    this.fetchEpisodes(this.selectedEpisode)    
 
 
 
@@ -139,6 +125,15 @@ export class DashboardComponent {
     const regex = new RegExp(`(${query})`, 'gi'); 
     return text.replace(regex, `<mark>$1</mark>`); 
   }
+
+fetchEpisodes(episodeUrls: string[]): void {
+  this.dataService.getEpisodeDetails(episodeUrls).subscribe(
+    episodes => {
+      this.episodeDetails = episodes;
+    },
+    
+  );
+}
 
 
 

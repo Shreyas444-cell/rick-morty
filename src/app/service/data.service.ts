@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { data, episodeType, selectedData } from '../model';
+import { forkJoin, Observable } from 'rxjs';
+import { data, episodeType } from '../model';
 
 
 @Injectable({
@@ -12,11 +12,11 @@ export class DataService {
   constructor(private http: HttpClient) { }
   private url=  'https://rickandmortyapi.com/api/character'
 
-  getData(url:string= this.url): Observable<data> {
-    return this.http.get<data>(url);
+  getData(page:number): Observable<data> {
+    return this.http.get<any>(`${this.url}?page=${page}`);
   }
 
-  getEpisodeDetails(episodeUrl: string): Observable<episodeType> {
-    return this.http.get<episodeType>(episodeUrl);
+  getEpisodeDetails(urls: string[]): Observable<any[]> {
+    return forkJoin(urls.map(url => this.http.get<any>(url)));
   }
 }
